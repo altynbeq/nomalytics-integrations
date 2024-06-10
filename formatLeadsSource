@@ -1,0 +1,25 @@
+const formatLeadsSource = (leadsSource) => {
+  const formattedData = [];
+  const totalLeads = Object.values(leadsSource).reduce((sum, value) => sum + value, 0);
+
+  if (totalLeads === 0) {
+      for (const [key, value] of Object.entries(leadsSource)) {
+          formattedData.push({
+              x: key,
+              y: value,
+              text: '0.00%'
+          });
+      }
+  } else {
+      for (const [key, value] of Object.entries(leadsSource)) {
+          const percentage = ((value / totalLeads) * 100).toFixed(2);
+          formattedData.push({
+              x: key,
+              y: value,
+              text: `${percentage}%`
+          });
+      }
+  }
+
+  return formattedData;
+};
